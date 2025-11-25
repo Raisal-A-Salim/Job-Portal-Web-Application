@@ -1,0 +1,99 @@
+﻿@model JobSiteApplication.Models.ApplyCls
+@{
+    ViewBag.Title = "Apply_PageLoad";
+}
+<style>
+    .field-validation-error {
+        color: red;
+        font-weight: bold;
+    }
+</style>
+<h2>Apply for @Model.job.Job_Title</h2>
+<div>
+    @using (Html.BeginForm("Apply_ButtonClick", "Apply", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(m => m.job.Job_ID)
+        <table>
+            <tbody>
+                <tr>
+                    <td>Company Name&nbsp;&nbsp;&nbsp;</td>
+                    <td>:&nbsp;</td>
+                    <td>
+                        @Html.DisplayFor(m => m.job.Comp_Name)
+                    </td>
+                </tr>
+                <tr>
+                    <td>Role</td>
+                    <td>:&nbsp;</td>
+                    <td>
+                        @Html.DisplayFor(m => m.job.Job_Title)
+                    </td>
+                </tr>
+                <tr>
+                    <td>Job Description</td>
+                    <td>:&nbsp;</td>
+                    <td>
+                        @Html.DisplayFor(m => m.job.Job_Descr)
+                    </td>
+                </tr>
+                <tr>
+                    <td>Location</td>
+                    <td>:&nbsp;</td>
+                    <td>
+                        @Html.DisplayFor(m => m.job.Location)
+                    </td>
+                </tr>
+                <tr>
+                    <td>Salary</td>
+                    <td>:&nbsp;</td>
+                    <td>
+                        @Html.DisplayFor(m => m.job.Salary)
+                    </td>
+                </tr>
+                <tr>
+                    <td>Skills Required</td>
+                    <td>:&nbsp;</td>
+                    <td>
+                        @Html.DisplayFor(m => m.job.Skills)
+                    </td>
+                </tr>
+                <tr><td colspan="3">&nbsp;</td></tr>
+                <tr><td colspan="3">&nbsp;</td></tr>
+                @if (ViewBag.Applied == true)
+                {
+                    <tr>
+                        <td colspan="3">
+                            <span style="color: green; font-weight: bold;">Applied</span>
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td>Upload Resume</td>
+                        <td>:&nbsp;</td>
+                        <td>
+                            <input type="file" name="resume" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>@Html.ValidationMessageFor(m => m.CV)</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <input type="submit" value="Apply" />
+                        </td>
+                    </tr>
+                }
+                <tr><td colspan="3">&nbsp;</td></tr>
+                <tr>
+                    <td colspan="3">
+                        @Html.ActionLink("Back to Jobs", "UserHome_PageLoad", "UserHome")
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+     }
+</div>

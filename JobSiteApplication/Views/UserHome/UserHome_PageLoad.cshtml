@@ -1,0 +1,77 @@
+﻿@model JobSiteApplication.Models.UserHomeCls
+@{
+    ViewBag.Title = "UserHome_PageLoad";
+}
+<h2>Search Jobs</h2>
+<style>
+    .myGrid {
+        border-collapse: collapse;
+        width: 100%;
+        border: 1.5px solid black; /* outer table border */
+    }
+    /* All cells default 1px border */
+
+    .myGrid td, .myGrid th {
+            border: 0.75px solid black;
+            padding: 5px;
+    }
+    /* Entire first row 2px border */
+
+    .myGrid tr:first-child td, .myGrid tr:first-child th {
+        border: 1.5px solid black;
+    }
+    /* Vertical borders between all columns */
+
+    .myGrid td + td, .myGrid th + th {
+        border-left: 1.5px solid black;
+    }
+</style>
+@using(Html.BeginForm("SearchButtonClick", "UserHome", FormMethod.Post)) 
+ {
+    <div>
+        <table width="100%">
+            <tr>
+                <td>Experience:</td>
+                <td>@Html.TextBoxFor(m => m.Input_Experience)</td>
+                <td>Location:</td>
+                <td>@Html.TextBoxFor(m => m.Input_Location)</td>
+                <td>Skills:</td>
+                <td>@Html.TextBoxFor(m=>m.Input_Skills)</td>
+                <td><input type="submit" value="Search" /></td>
+            </tr>
+        </table>
+    </div>
+    <br />
+    <table class="myGrid">
+        <thead>
+            <tr>
+                <th>Job Title</th>
+                <th>Company</th>
+                <th>Job Desciption</th>
+                <th>Location</th>
+                <th>Experience</th>
+                <th>Skills</th>
+                <th>Salary</th>
+                <th>Last Date To Apply</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Model.JobList)
+             {
+                <tr>
+                    <td>@item.Job_Title</td>
+                    <td>@item.Comp_Name</td>
+                    <td>@item.Job_Descr</td>
+                    <td>@item.Location</td>
+                    <td>@item.Experience</td>
+                    <td>@item.Skills</td>
+                    <td>@item.Salary</td>
+                    <td>@item.LastDate.ToString("dd-MM-yyyy")</td>
+                    <td>
+                        @Html.ActionLink("Click To Apply","Apply_PageLoad","Apply", new {Job_ID=item.Job_ID}, null)
+                    </td>
+                </tr>
+             }
+        </tbody>
+    </table>
+ }

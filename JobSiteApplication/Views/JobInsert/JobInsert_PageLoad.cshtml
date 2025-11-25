@@ -1,0 +1,56 @@
+﻿@model JobSiteApplication.Models.JobInsertCls
+@{
+    ViewBag.Title = "JobInsert_PageLoad";
+}
+<h2>Job Creation</h2>
+<div>
+    @using (Html.BeginForm("JobInsert_ButtonClick", "JobInsert", FormMethod.Post))
+    {
+        <div><label>Job Title:</label></div>
+        <div>
+            @Html.TextBoxFor(m => m.Job_Title)
+            @Html.ValidationMessageFor(m => m.Job_Title)
+        </div>
+        <br />
+        <div><label>Job Description:</label></div>
+        <div>
+            @Html.TextBoxFor(m => m.Job_Descr)
+            @Html.ValidationMessageFor(m => m.Job_Descr)
+        </div>
+        <br />
+        <div><label>Location:</label></div>
+        <div>
+            @Html.TextBoxFor(m => m.Location)
+            @Html.ValidationMessageFor(m => m.Location)
+        </div>
+        <br />
+        <div><label>Salary:</label></div>
+        <div>
+            @Html.TextBoxFor(m => m.Salary)
+            @Html.ValidationMessageFor(m => m.Salary)
+        </div>
+        <br />
+        <div><label>Skills Required:</label></div>
+        <div>
+            @Html.TextAreaFor(m => m.Skills)
+            @Html.ValidationMessageFor(m => m.Skills)
+        </div>
+        <br />
+        <div><label>Experience Required:</label></div>
+        <div>
+            @Html.TextBoxFor(m => m.Experience)
+            @Html.ValidationMessageFor(m => m.Experience)
+        </div>
+        <br />
+        <div><label>Last Date To Apply</label></div>
+        <div>
+            <input name="LastDate" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+        </div>
+        <br />
+        <div>
+            <input type="submit" value="Create Job" />
+            <br />
+            @Html.DisplayFor(m=>m.msg)
+        </div>
+    }
+</div>

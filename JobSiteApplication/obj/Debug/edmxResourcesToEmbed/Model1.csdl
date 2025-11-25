@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="JobSiteDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Application_Table">
+    <Key>
+      <PropertyRef Name="Appl_ID" />
+    </Key>
+    <Property Name="Appl_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Job_ID" Type="Int32" Nullable="false" />
+    <Property Name="User_ID" Type="Int32" Nullable="false" />
+    <Property Name="CV" Type="String" MaxLength="450" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Appl_Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Appl_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Company_Table">
+    <Key>
+      <PropertyRef Name="Comp_ID" />
+    </Key>
+    <Property Name="Comp_ID" Type="Int32" Nullable="false" />
+    <Property Name="Comp_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Comp_Address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Comp_Phone" Type="Int64" Nullable="false" />
+    <Property Name="Comp_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="WebsiteAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Job_Table">
+    <Key>
+      <PropertyRef Name="Job_ID" />
+    </Key>
+    <Property Name="Job_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Comp_ID" Type="Int32" Nullable="false" />
+    <Property Name="Job_Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Job_Descr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Salary" Type="Int32" Nullable="false" />
+    <Property Name="Skills" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Experience" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Job_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Login_Table">
+    <Key>
+      <PropertyRef Name="Log_ID" />
+    </Key>
+    <Property Name="Log_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Reg_ID" Type="Int32" Nullable="false" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Log_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User_Table">
+    <Key>
+      <PropertyRef Name="User_ID" />
+    </Key>
+    <Property Name="User_ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Age" Type="Int32" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Phone" Type="Int64" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Qualification" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Skills" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+    <Property Name="Experience" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="JobSiteDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Application_Table" EntityType="Self.Application_Table" />
+    <EntitySet Name="Company_Table" EntityType="Self.Company_Table" />
+    <EntitySet Name="Job_Table" EntityType="Self.Job_Table" />
+    <EntitySet Name="Login_Table" EntityType="Self.Login_Table" />
+    <EntitySet Name="User_Table" EntityType="Self.User_Table" />
+    <FunctionImport Name="sp_companyinsert">
+      <Parameter Name="cid" Mode="In" Type="Int32" />
+      <Parameter Name="cname" Mode="In" Type="String" />
+      <Parameter Name="caddr" Mode="In" Type="String" />
+      <Parameter Name="cphone" Mode="In" Type="Int64" />
+      <Parameter Name="cdesc" Mode="In" Type="String" />
+      <Parameter Name="cweb" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_jobinsert">
+      <Parameter Name="cid" Mode="In" Type="Int32" />
+      <Parameter Name="jobtitle" Mode="In" Type="String" />
+      <Parameter Name="jobdesc" Mode="In" Type="String" />
+      <Parameter Name="loc" Mode="In" Type="String" />
+      <Parameter Name="salary" Mode="In" Type="Int32" />
+      <Parameter Name="skills" Mode="In" Type="String" />
+      <Parameter Name="exp" Mode="In" Type="String" />
+      <Parameter Name="last_date" Mode="In" Type="DateTime" />
+      <Parameter Name="jobst" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_loginidcountget" ReturnType="Collection(Int32)">
+      <Parameter Name="una" Mode="In" Type="String" />
+      <Parameter Name="pswd" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_loginidmax" ReturnType="Collection(Int32)" />
+    <FunctionImport Name="sp_loginsert">
+      <Parameter Name="rid" Mode="In" Type="Int32" />
+      <Parameter Name="una" Mode="In" Type="String" />
+      <Parameter Name="pswd" Mode="In" Type="String" />
+      <Parameter Name="logty" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_selectlogid" ReturnType="Collection(Int32)">
+      <Parameter Name="una" Mode="In" Type="String" />
+      <Parameter Name="pswd" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_selectusertype" ReturnType="Collection(String)">
+      <Parameter Name="una" Mode="In" Type="String" />
+      <Parameter Name="pswd" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_userinsert">
+      <Parameter Name="uid" Mode="In" Type="Int32" />
+      <Parameter Name="una" Mode="In" Type="String" />
+      <Parameter Name="age" Mode="In" Type="Int32" />
+      <Parameter Name="addr" Mode="In" Type="String" />
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="phone" Mode="In" Type="Int64" />
+      <Parameter Name="gender" Mode="In" Type="String" />
+      <Parameter Name="qual" Mode="In" Type="String" />
+      <Parameter Name="skills" Mode="In" Type="String" />
+      <Parameter Name="exp" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_JobSearch">
+      <Parameter Name="qry" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_InsertApplication">
+      <Parameter Name="jid" Mode="In" Type="Int32" />
+      <Parameter Name="uid" Mode="In" Type="Int32" />
+      <Parameter Name="cv" Mode="In" Type="String" />
+      <Parameter Name="dat" Mode="In" Type="DateTime" />
+      <Parameter Name="sta" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_CheckAlreadyApplied" ReturnType="Collection(String)">
+      <Parameter Name="jid" Mode="In" Type="Int32" />
+      <Parameter Name="uid" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

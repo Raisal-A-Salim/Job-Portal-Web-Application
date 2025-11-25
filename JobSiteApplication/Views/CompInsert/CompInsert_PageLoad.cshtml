@@ -1,0 +1,66 @@
+﻿@model JobSiteApplication.Models.CompInsertCls
+@{
+    ViewBag.Title = "CompInsert_PageLoad";
+
+
+}
+
+<h2>Company Registration</h2>
+<div>
+    @using (Html.BeginForm("CompInsert_ButtonClick", "CompInsert", FormMethod.Post))
+    {
+        <div><label>Name:</label></div>
+        <div>
+            @Html.TextBoxFor(m => m.Comp_Name)
+            @Html.ValidationMessageFor(m => m.Comp_Name)
+        </div>
+        <br />
+        <div><label>Address:</label></div>
+        <div>
+            @Html.TextAreaFor(m => m.Comp_Address)
+            @Html.ValidationMessageFor(m => m.Comp_Address)
+        </div>
+        <br />
+        <div><label>Phone:</label></div>
+        <div>
+            @Html.TextBoxFor(m => m.Comp_Phone)
+            @Html.ValidationMessageFor(m => m.Comp_Phone)
+        </div>
+        <br />
+        <div><label>Description:</label></div>
+        <div>
+            @Html.TextAreaFor(m => m.Comp_Description)
+            @Html.ValidationMessageFor(m => m.Comp_Description)
+        </div>
+        <br />
+        <div><label>Website Address:</label></div>
+        <div>
+            @Html.TextBoxFor(m => m.WebsiteAddress)
+            @Html.ValidationMessageFor(m => m.WebsiteAddress)
+        </div>
+        <br />
+        <div><label>Username:</label></div>
+        <div>
+            @Html.TextBoxFor(m => m.Username)
+            @Html.ValidationMessageFor(m => m.Username)
+        </div>
+        <br />
+        <div><label>Password:</label></div>
+        <div>
+            @Html.PasswordFor(m => m.Password)
+            @Html.ValidationMessageFor(m => m.Password)
+        </div>
+        <br />
+        <div><label>Confirm Password:</label></div>
+        <div>
+            @Html.PasswordFor(m => m.ConfirmPassword)
+            @Html.ValidationMessageFor(m => m.ConfirmPassword)
+        </div>
+        <br />
+        <div>
+            <input type="submit" value="Register" />
+            <br />
+            @Html.DisplayFor(m => m.msg)
+        </div>
+    }
+</div>

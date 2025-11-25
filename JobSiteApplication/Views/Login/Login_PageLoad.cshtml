@@ -1,0 +1,27 @@
+﻿@model JobSiteApplication.Models.LoginCls
+@{
+    ViewBag.Title = "Login_PageLoad";
+}
+<h2>Login</h2>
+<div>
+    @using (Html.BeginForm("Login_ButtonClick", "Login", FormMethod.Get))
+     {
+        <div><label>Username:</label></div>
+        <div>
+            @Html.TextBoxFor(m => m.Username)
+            @Html.ValidationMessageFor(m=>m.Username)
+        </div>
+        <br />
+        <div><label>Password:</label></div>
+        <div>
+            @Html.PasswordFor(m => m.Password)
+            @Html.ValidationMessageFor(m=>m.Password)
+        </div>
+        <br />
+        <div>
+            <input type="submit" value="Login" />
+            <br />
+            @Html.DisplayFor(m => m.msg)
+        </div>
+     }
+</div>
